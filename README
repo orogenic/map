@@ -1,0 +1,11 @@
+A C implementation of an open-addressing hash map using Robin Hood linear probing and true deletion.
+
+Many open-addressing hash maps implement lazy deletion using tombstones, although this can have rough performance characteristics when many deletions occur. True deletion can reduce probe lengths by searching for greater-displaced slots to fill deleted slots. Robin Hood linear probing can reduce the variance of probe lengths by evicting lesser-displaced slots during insertion.
+
+There are multiple advantages to using true deletion and Robin Hood linear probing together. Both require the probe length to be stored per slot, so the space overhead of using one is the same as of using both. Searches may terminate when a slot's probe length is less than the current search probe length, not only when an empty slot is encountered. Deletion may shift every displaced slot after the deleted slot to the previous slot until a non-displaced or empty slot is encountered, instead of the continuously searching for eligible slots to fill deleted slots until an empty slot is encountered.
+
+Reference:
+
+On Deletions in Open Addressing Hashing
+Rosa M. Jiménez, Conrado Martínez
+https://epubs.siam.org/doi/10.1137/1.9781611975062.3
